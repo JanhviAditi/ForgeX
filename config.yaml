@@ -1,0 +1,113 @@
+# Document Forgery Detection - Default Configuration
+# This file contains the default configuration settings for the project
+
+# Data Configuration
+data:
+  raw_data_path: "data/raw"
+  processed_data_path: "data/processed" 
+  interim_data_path: "data/interim"
+  external_data_path: "data/external"
+  
+  # Data splits (must sum to 1.0)
+  train_split: 0.7
+  validation_split: 0.2
+  test_split: 0.1
+  
+  # Image processing
+  target_image_size: [224, 224]  # [width, height]
+  supported_formats: [".jpg", ".jpeg", ".png", ".bmp", ".tiff", ".tif"]
+  
+  # Data augmentation
+  augmentation_factor: 2
+  apply_augmentation: false
+
+# Feature Extraction Configuration
+features:
+  # Texture features - Gabor filters
+  gabor_frequencies: [0.1, 0.3, 0.5]
+  gabor_orientations: [0, 45, 90, 135]  # degrees
+  
+  # Edge detection parameters
+  canny_low_threshold: 50
+  canny_high_threshold: 150
+  sobel_kernel_size: 3
+  
+  # Local Binary Pattern parameters
+  lbp_radius: 3
+  lbp_n_points: 24
+  
+  # Gray Level Co-occurrence Matrix parameters
+  glcm_distances: [1, 2, 3]
+  glcm_angles: [0, 0.785, 1.571, 2.356]  # radians: 0°, 45°, 90°, 135°
+  glcm_levels: 8
+
+# Model Configuration
+model:
+  random_state: 42
+  models_path: "models"
+  
+  # Traditional ML models
+  traditional_ml_models:
+    random_forest:
+      n_estimators: 100
+      max_depth: 10
+      min_samples_split: 2
+      min_samples_leaf: 1
+    gradient_boosting:
+      n_estimators: 100
+      max_depth: 6
+      learning_rate: 0.1
+    svm:
+      C: 1.0
+      kernel: "rbf"
+      gamma: "scale"
+    logistic_regression:
+      C: 1.0
+      max_iter: 1000
+  
+  # Grid search settings
+  use_grid_search: false
+  cv_folds: 5
+  
+  # Deep Learning parameters
+  batch_size: 32
+  epochs: 50
+  learning_rate: 0.001
+  early_stopping_patience: 10
+  reduce_lr_patience: 5
+  reduce_lr_factor: 0.2
+  
+  # CNN Architecture
+  cnn_dropout_rate: 0.5
+  cnn_batch_norm: true
+  
+  # Transfer Learning
+  transfer_learning_models: ["vgg16", "resnet50", "efficientnet"]
+  freeze_base_model: true
+  fine_tune_epochs: 20
+  fine_tune_lr: 0.0001
+
+# Evaluation Configuration
+evaluation:
+  metrics: ["accuracy", "precision", "recall", "f1", "auc"]
+  cross_validation: true
+  cv_folds: 5
+  test_size: 0.2
+  
+  # Visualization settings
+  plot_confusion_matrix: true
+  plot_roc_curve: true
+  plot_feature_importance: true
+  save_plots: true
+  plots_dpi: 300
+
+# Project Structure
+project_root: "."
+src_path: "src"
+notebooks_path: "notebooks"
+reports_path: "reports"
+figures_path: "reports/figures"
+
+# Logging Configuration
+log_level: "INFO"
+log_format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
