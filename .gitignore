@@ -8,6 +8,8 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
+venv/
+ENV/
 build/
 develop-eggs/
 dist/
@@ -76,7 +78,37 @@ target/
 .ipynb_checkpoints/
 
 # exclude data from source control by default
-/data/
+/data/raw/*
+/data/processed/*
+/data/interim/*
+/data/external/*
+# But keep directory structure
+!data/raw/.gitkeep
+!data/raw/authentic/.gitkeep
+!data/raw/forged/.gitkeep
+!data/processed/.gitkeep
+!data/interim/.gitkeep
+!data/external/.gitkeep
+
+# Trained models
+/models/*.joblib
+/models/*.h5
+/models/*.pkl
+/models/*.pt
+/models/*.pth
+# Keep directory
+!models/.gitkeep
+
+# Reports and figures
+/reports/figures/*.png
+/reports/figures/*.jpg
+/reports/figures/*.pdf
+!reports/figures/.gitkeep
+
+# Logs
+/logs/*.log
+/logs/*.txt
+!logs/.gitkeep
 
 # Mac OS-specific storage files
 .DS_Store
@@ -87,3 +119,7 @@ target/
 
 # Mypy cache
 .mypy_cache/
+
+# Test images (personal data)
+test_image.jpg
+WhatsApp*.jpg
